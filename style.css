@@ -7,3 +7,9 @@ body {
   font-family: monospace;
   background-color: pink;
 }
+
+#error {
+  color: red;
+  font-weight: bold;
+  /* font-size: 40px; */
+}
