@@ -16,6 +16,9 @@ const followers = [
   }
 ]
 
+const followersJSON = JSON.stringify(followers)
+console.log(followersJSON)
+
 followers.forEach(i => console.log(i.userName))
 
 const usernames = followers.map(i => i.userName)

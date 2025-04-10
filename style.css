@@ -5,11 +5,18 @@
 
 body {
   font-family: monospace;
-  background-color: pink;
+  background-color: hotpink;
 }
 
 #error {
   color: red;
   font-weight: bold;
   /* font-size: 40px; */
+}
+
+.foodItem {
+  font-family: cursive;
+  color: white;
+  border: 1px solid teal;
+  padding: 10px;
 }
