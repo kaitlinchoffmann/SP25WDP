@@ -11,6 +11,6 @@ router.get('/getUsers', (req, res) => {
   }
 })
 
-"http://localhost:3000/users/getUsers"
+ "http://localhost:3000/users/getUsers"
 
 module.exports = router
