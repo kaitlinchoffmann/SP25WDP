@@ -1,6 +1,7 @@
 // specify we want to use express
 const express = require('express')
 const app = express()
+app.use(express.json())
 
 const userRoutes = require("./server/routes/user")
 // const recipeRoutes = require("./server/routes/recipe")

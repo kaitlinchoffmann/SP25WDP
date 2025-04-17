@@ -26,18 +26,34 @@ async function createTable() {
 }
 createTable()
 
-// USER Example:
-// const user = {
-//   Username: "cathy123",
-//   Email: "cathy@fakemail.com",
-//   Password: "icecream"
-// }
-
-
 // CRUD Operations
 async function getAllUsers() {
   let sql = `SELECT * FROM User`
   return await con.query(sql)
 }
+// USER Example:
+const user = {
+  Username: "Bobbyiscool",
+  Email: "b@b",
+  Password: "cathysucks"
+}
+// READ in CRUD: Logging in a user
+async function login(user) {
+  let cUser = await userExists(user.Username)
+  if(!cUser[0]) throw Error("Username does not exist!") 
+  if(cUser[0].password != user.Password) throw Error("Password is incorrect!")
+    
+  return cUser[0]
+}
 
-module.exports = { getAllUsers }
+async function userExists(username) {
+  let sql = `
+    SELECT * FROM User
+    WHERE Username="${username}"
+  `
+  return await con.query(sql)
+}
+
+// CREATE in CRUD - Registering a user
+
+module.exports = { getAllUsers, login }
