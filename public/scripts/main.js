@@ -15,7 +15,7 @@ async function fetchData(route = '', data = {}, methodType) {
 }
 // window.alert("Welcome to Class!!!! :)")
 let loginForm = document.getElementById('loginForm')
-loginForm.addEventListener('submit', login)
+if(loginForm) loginForm.addEventListener('submit', login)
 
 function login(e) {
   e.preventDefault()
@@ -58,6 +58,32 @@ function login(e) {
 function validString(word) {
   return word == ""
 }
+
+// register form code
+let registerForm = document.getElementById("registerForm")
+if(registerForm) registerForm.addEventListener('submit', register)
+
+function register(e) {
+  e.preventDefault() 
+
+  let errorSection = document.getElementById("error")
+
+  const user = {
+    Username: document.getElementById("username").value,
+    Password: document.getElementById("password").value
+  }
+
+  fetchData("/users/register", user, "POST")
+  .then(data => {
+    if(!data.message) {
+      setCurrentUser(data)
+      window.location.href = "food.html"
+    }
+  })
+  .catch(err => {
+    errorSection.innerText = `${err.message}`
+  })
+}  
 
 // local storage functions
 function setCurrentUser(user) {

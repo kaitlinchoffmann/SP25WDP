@@ -51,6 +51,7 @@ async function userExists(username) {
 
 // CREATE in CRUD - Registering a user
 async function register(user) {
+  console.log(user)
   const cUser = await userExists(user.Username)
   if(cUser.length > 0) throw Error("Username already in use!")
 
