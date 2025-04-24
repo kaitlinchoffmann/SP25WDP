@@ -1,5 +1,5 @@
 // Fetch method implementation:
-export async function fetchData(route = '', data = {}, methodType) {
+async function fetchData(route = '', data = {}, methodType) {
   const response = await fetch(`http://localhost:3000${route}`, {
     method: methodType, // *POST, PUT, DELETE, etc.
     headers: {
@@ -28,12 +28,22 @@ function login(e) {
     errorSection.innerText = `Username cannot be blank!!!`
   } else {
     errorSection.innerText = ""  
-    console.log(username)
 
     const user = {
-      userName: username,
-      passwd: password
+      Username: username,
+      Password: password
     }
+
+    fetchData('/users/login', user, "POST")
+    .then(data => {
+      if(!data.message) {
+        setCurrentUser(data)
+        window.location.href = "food.html"
+      }
+    })
+    .catch(err => {
+      errorSection.innerText = `${err.message}`
+    })
   
     let section = document.getElementById("welcome")
     section.innerHTML = `Welcome, ${username}!`
@@ -47,4 +57,17 @@ function login(e) {
 
 function validString(word) {
   return word == ""
+}
+
+// local storage functions
+function setCurrentUser(user) {
+  localStorage.setItem('user', JSON.stringify(user))
+}
+
+function getCurrentUser() {
+  return JSON.parse(localStorage.getItem('user'))
+}
+
+function removeCurrentUser() {
+  localStorage.removeItem('user')
 }
