@@ -1,17 +1,3 @@
-// psuedo database => can use object literal as temp database
-// const users = [
-//   {
-//     userId: 12345,
-//     userName: "cathy123",
-//     password: "icecream"
-//   },
-//   {
-//     userId: 55555,
-//     userName: "bobbi",
-//     password: "badpasswd"
-//   }
-// ]
-
 const con = require("./db_connect")
 
 async function createTable() {
@@ -35,7 +21,7 @@ async function getAllUsers() {
 // READ in CRUD: Logging in a user
 async function login(user) {
   let cUser = await userExists(user.Username)
-  if(!cUser[0]) throw Error("Username does not exist!") 
+  if(!cUser[0]) throw Error("Username does not exist!")
   if(cUser[0].password != user.Password) throw Error("Password is incorrect!")
     
   return cUser[0]
@@ -51,7 +37,6 @@ async function userExists(username) {
 
 // CREATE in CRUD - Registering a user
 async function register(user) {
-  console.log(user)
   const cUser = await userExists(user.Username)
   if(cUser.length > 0) throw Error("Username already in use!")
 

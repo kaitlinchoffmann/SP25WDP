@@ -5,9 +5,6 @@ const path = require("path")
 
 app.use(express.json())
 
-app.use(express.static(__dirname + "/public"))
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/public/login.html')))
-
 const userRoutes = require("./server/routes/user")
 // const recipeRoutes = require("./server/routes/recipe")
 
@@ -18,6 +15,9 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");  
   next();
 });
+
+app.use(express.static(__dirname + "/public"))
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/public/index.html')))
 
 app.use("/users", userRoutes)
 // app.use("/recipe", recipeRoutes)
