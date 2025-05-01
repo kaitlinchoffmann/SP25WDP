@@ -75,7 +75,7 @@ function register(e) {
 }  
 
 // local storage functions
-function setCurrentUser(user) {
+export function setCurrentUser(user) {
   localStorage.setItem('user', JSON.stringify(user))
 }
 

@@ -32,6 +32,7 @@ router
 
 .put('/update', async (req, res) => {
   try {
+    console.log(req.body)
     const user = await User.editUsername(req.body)
     res.send({...user, password: undefined})
   } catch(err) {

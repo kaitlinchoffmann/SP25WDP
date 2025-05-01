@@ -1,4 +1,4 @@
-import { getCurrentUser, removeCurrentUser } from "./user.js";
+import { getCurrentUser, removeCurrentUser, setCurrentUser } from "./user.js";
 import { fetchData } from "./main.js";
 
 const user = getCurrentUser()
@@ -7,9 +7,9 @@ if(!user) window.location.href = "index.html"
 
 const profile = document.getElementById("profile")
 
-profile.innerHTML = `
+profile.innerHTML+= `
    <h1>Welcome ${user.username}!</h1>
-  <button id="deleteAccount">Delete Account</button>
+   <button id="deleteAccount">Delete Account</button>
 `
 
 const deleteUser = document.getElementById("deleteAccount")
@@ -20,10 +20,31 @@ function deleteAccount() {
     fetchData('/users/deleteAccount', user, "DELETE")
     .then(data => {
       if(!data.message) {
-        console.log(data)
         removeCurrentUser()
         window.location.href = "index.html"
       }
     })
+    .catch(err => {
+      errorSection.innerText = `${err.message}`
+    })
   }
 }
+
+// edit username functionality
+const editForm = document.getElementById("editForm")
+if(editForm) editForm.addEventListener('submit', editUsername)
+
+function editUsername(e) {
+  e.preventDefault()
+
+  user.username =  document.getElementById("username").value 
+  
+  fetchData('/users/update', user, "PUT")
+  .then(data => {
+    removeCurrentUser()
+    setCurrentUser(data)
+  })
+  .catch(err => {
+    errorSection.innerText = `${err.message}`
+  })
+}  

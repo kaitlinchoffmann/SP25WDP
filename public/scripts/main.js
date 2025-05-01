@@ -5,6 +5,7 @@ if(getCurrentUser()) {
   nav.innerHTML = `
     <ul>
         <li><a href="index.html">HOME</a></li>
+        <li><a href="profile.html">PROFILE</a></li>
         <li><a id="logout">LOGOUT</a></li>
     </ul>
   `
