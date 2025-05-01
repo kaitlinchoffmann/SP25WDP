@@ -8,7 +8,7 @@ async function createTable() {
       Password VARCHAR(255) NOT NULL,
       CONSTRAINT userPK PRIMARY KEY(userID)
     );`
-  await con.query(sql)  
+  await con.query(sql)
 }
 createTable()
 
